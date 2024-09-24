@@ -60,7 +60,7 @@
   // Функция для добавления новой строки
   function addRow() {
     const tbody = document.getElementsByTagName('tbody');
-    const newRow = tbody[0].insertRow(tbody.length - 1);
+    const newRow = tbody[0].insertRow(tbody.length);
 
     for (let i = 0; i < 3; i++) {
       const newCell = newRow.insertCell();
