@@ -46,11 +46,11 @@
     <td><input type="text" value="20" oninput="calculateTotal()"></td>
     <td><input type="text" value="30" oninput="calculateTotal()"></td>
   </tr>
-  </tbody>
   <tr>
     <td colspan="2"><strong>Total Amount</strong></td>
     <td>60</td>
   </tr>
+  </tbody>
 </table>
 
 <button onclick="addRow()">+ Add Row</button>
@@ -59,8 +59,8 @@
 <script>
   // Функция для добавления новой строки
   function addRow() {
-    const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+    const tbody = document.getElementsByTagName('tbody');
+    const newRow = tbody[0].insertRow(tbody.length - 1);
 
     for (let i = 0; i < 3; i++) {
       const newCell = newRow.insertCell();
@@ -75,16 +75,17 @@
 
   // Функция для удаления последней строки
   function removeRow() {
-    const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-    if (table.rows.length > 1) {
-      table.deleteRow(table.rows.length - 1);
+    const tbody = document.getElementsByTagName('tbody');
+    if (tbody[0].rows.length > 1) {
+      tbody[0].deleteRow(tbody[0].rows.length - 2);
       calculateTotal(); // Пересчитываем сумму при удалении строки
     }
   }
 
   // Функция для пересчета общей суммы
   function calculateTotal() {
-    const rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].rows;
+    const tbody = document.getElementsByTagName('tbody');
+    const rows = tbody[0].rows;
     let total = 0;
 
     for (let i = 0; i < rows.length; i++) {
@@ -94,7 +95,8 @@
       }
     }
 
-    // document.getElementById('totalAmount').textContent = total;
+    const tds = document.getElementsByTagName('td');
+    tds[tds.length - 1].textContent = total;
   }
 
   // Инициализируем расчет общей суммы при загрузке страницы
